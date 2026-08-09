@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[GYM NAME] | Premium Gym & Management SaaS</title>
+  <style>
+    :root {
+      --black: #050505;
+      --dark: #101010;
+      --muted: #737373;
+      --line: #262626;
+      --orange: #ff5a1f;
+      --gold: #f5b84b;
+      --cream: #f8f1e7;
+      --white: #fff;
+      --green: #13b981;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--white);
+      background: var(--black);
+      scroll-behavior: smooth;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--black);
+      color: var(--white);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .offer-bar {
+      position: relative;
+      z-index: 20;
+      text-align: center;
+      background: linear-gradient(90deg, var(--orange), #f97316);
+      color: #fff;
+      padding: 10px 16px;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+    }
+
+    .offer-bar a {
+      text-decoration: underline;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 15;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      padding: 20px 6vw;
+      background: rgba(5, 5, 5, 0.86);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid #ffffff14;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: 1000;
+      letter-spacing: -0.04em;
+    }
+
+    .site-header nav {
+      display: flex;
+      gap: 24px;
+      color: #d4d4d4;
+      font-weight: 800;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 999px;
+      background: var(--orange);
+      color: #fff;
+      padding: 14px 22px;
+      font-weight: 1000;
+      box-shadow: 0 18px 45px #ff5a1f40;
+      cursor: pointer;
+    }
+
+    .btn-small {
+      padding: 11px 18px;
+    }
+
+    .btn.ghost {
+      background: transparent;
+      border: 1px solid #ffffff30;
+      box-shadow: none;
+    }
+
+    .hero {
+      min-height: calc(100vh - 48px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+      align-items: center;
+      gap: 56px;
+      padding: 82px 6vw;
+      background:
+        radial-gradient(circle at 72% 22%, #ff5a1f38, transparent 30%),
+        linear-gradient(135deg, #080808 0%, #171717 55%, #060606 100%);
+    }
+
+    .kicker {
+      margin: 0 0 12px;
+      color: var(--gold);
+      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 1000;
+      letter-spacing: 0.16em;
+    }
+
+    .hero h1 {
+      font-size: clamp(54px, 11vw, 132px);
+      line-height: 0.82;
+      margin: 0 0 22px;
+      letter-spacing: -0.085em;
+    }
+
+    .hero h1 span {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--white);
+    }
+
+    .hero-copy > p:not(.kicker),
+    .split-section p,
+    .section > p,
+    .contact-section p {
+      max-width: 720px;
+      color: #d4d4d4;
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    .hero-actions,
+    .hero-stats {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .hero-stats {
+      gap: 34px;
+    }
+
+    .hero-stats strong {
+      font-size: 34px;
+    }
+
+    .hero-stats span {
+      display: block;
+      margin-top: 4px;
+      color: #a3a3a3;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .hero-card {
+      max-width: 420px;
+      margin: auto;
+      padding: 26px;
+      border: 1px solid #ffffff18;
+      border-radius: 34px;
+      background: linear-gradient(180deg, #1f1f1f, #0d0d0d);
+      box-shadow: 0 35px 100px #000;
+    }
+
+    .phone-top,
+    .alert {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .phone-top {
+      font-weight: 1000;
+    }
+
+    .qr-box {
+      display: grid;
+      place-items: center;
+      width: 230px;
+      height: 230px;
+      margin: 28px auto 14px;
+      border-radius: 28px;
+      background: #fff;
+      color: #090909;
+      font-size: 120px;
+    }
+
+    .hero-card p {
+      text-align: center;
+      color: #bdbdbd;
+    }
+
+    .alert {
+      margin-top: 12px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: #1e1e1e;
+      color: #eee;
+    }
+
+    .alert.success {
+      border: 1px solid #13b98150;
+    }
+
+    .alert.warning {
+      border: 1px solid #f59e0b55;
+    }
+
+    .section,
+    .split-section {
+      padding: 88px 6vw;
+    }
+
+    .split-section {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 46px;
+      border-top: 1px solid #ffffff12;
+    }
+
+    .section h2,
+    .split-section h2 {
+      max-width: 900px;
+      margin: 0 0 28px;
+      font-size: clamp(34px, 6vw, 72px);
+      line-height: 0.9;
+      letter-spacing: -0.06em;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 12px;
+      padding: 0;
+      margin: 24px 0 0;
+      list-style: none;
+      color: #e5e5e5;
+    }
+
+    .check-list li:before {
+      content: "✓";
+      margin-right: 10px;
+      color: var(--orange);
+      font-weight: 1000;
+    }
+
+    .dark-section {
+      background: #111;
+    }
+
+    .feature-grid,
+    .saas-grid,
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .feature-grid article,
+    .saas-grid article,
+    .pricing-grid article,
+    .dashboard-panel,
+    .dashboard-preview aside,
+    .lead-form {
+      border: 1px solid #ffffff14;
+      border-radius: 26px;
+      background: #181818;
+      padding: 24px;
+    }
+
+    .feature-grid h3,
+    .saas-grid h3,
+    .pricing-grid h3 {
+      margin: 10px 0;
+      font-size: 22px;
+    }
+
+    .feature-grid p,
+    .saas-grid p,
+    .pricing-grid p {
+      color: #bdbdbd;
+      line-height: 1.65;
+    }
+
+    .management-section {
+      background: var(--cream);
+      color: #111;
+    }
+
+    .management-section .kicker {
+      color: #c2410c;
+    }
+
+    .management-section h2 {
+      color: #111;
+    }
+
+    .saas-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .saas-grid article,
+    .dashboard-panel,
+    .dashboard-preview aside {
+      background: #fff;
+      color: #111;
+      border-color: #eadfce;
+      box-shadow: 0 24px 70px #78350f18;
+    }
+
+    .saas-grid span {
+      font-size: 34px;
+    }
+
+    .dashboard-preview {
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      gap: 18px;
+      margin-top: 26px;
+    }
+
+    .dashboard-preview aside {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .dashboard-preview button {
+      border: 0;
+      border-radius: 16px;
+      padding: 15px;
+      text-align: left;
+      background: #f5efe4;
+      font-weight: 1000;
+    }
+
+    .dashboard-preview button.active {
+      background: #111;
+      color: #fff;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .panel-header h3 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .panel-header p {
+      color: #6b7280;
+    }
+
+    .search-pill {
+      border: 1px solid #e5e7eb;
+      border-radius: 999px;
+      padding: 12px 16px;
+      color: #6b7280;
+    }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 22px 0;
+    }
+
+    .metric-row div {
+      border-radius: 18px;
+      background: #f9fafb;
+      padding: 18px;
+    }
+
+    .metric-row strong {
+      display: block;
+      font-size: 28px;
+    }
+
+    .metric-row span {
+      color: #6b7280;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      color: #111;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 15px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    th {
+      color: #6b7280;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .pill {
+      display: inline-flex;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 12px;
+      font-weight: 1000;
+    }
+
+    .pill.ok {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .pill.warn {
+      background: #ffedd5;
+      color: #9a3412;
+    }
+
+    .pricing-section {
+      background: #080808;
+    }
+
+    .pricing-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .pricing-grid article.popular {
+      border-color: var(--orange);
+      transform: translateY(-10px);
+    }
+
+    .pricing-grid small {
+      color: var(--gold);
+      font-weight: 1000;
+      text-transform: uppercase;
+    }
+
+    .pricing-grid strong {
+      display: block;
+      margin: 8px 0 14px;
+      font-size: 34px;
+    }
+
+    .contact-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px;
+      background: linear-gradient(135deg, #161616, #050505);
+    }
+
+    .lead-form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .lead-form label {
+      display: grid;
+      gap: 8px;
+      color: #d4d4d4;
+      font-weight: 800;
+    }
+
+    .lead-form input,
+    .lead-form select {
+      width: 100%;
+      border: 1px solid #ffffff24;
+      border-radius: 14px;
+      background: #0b0b0b;
+      color: #fff;
+      padding: 14px;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 34px 6vw;
+      color: #bdbdbd;
+      border-top: 1px solid #ffffff12;
+    }
+
+    @media (max-width: 980px) {
+      .site-header nav {
+        display: none;
+      }
+
+      .hero,
+      .split-section,
+      .contact-section,
+      .dashboard-preview {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-grid,
+      .saas-grid,
+      .pricing-grid,
+      .metric-row {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-card {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .offer-bar {
+        font-size: 13px;
+      }
+
+      .site-header {
+        padding: 16px 4vw;
+      }
+
+      .section,
+      .split-section,
+      .hero {
+        padding: 56px 4vw;
+      }
+
+      .hero h1 {
+        font-size: 58px;
+      }
+
+      .feature-grid,
+      .saas-grid,
+      .pricing-grid,
+      .metric-row {
+        grid-template-columns: 1fr;
+      }
+
+      .panel-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      table {
+        font-size: 12px;
+      }
+
+      .qr-box {
+        width: 190px;
+        height: 190px;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="offer-bar">
+    🔥 LIMITED TIME OFFER: Get 20% OFF on Pro & Elite Plans
+    <a href="#membership">Claim Offer →</a>
+  </div>
+
+  <header class="site-header">
+    <a class="logo" href="#home">[GYM NAME].</a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#facilities">Facilities</a>
+      <a href="#membership">Membership</a>
+      <a href="#management">Member Portal</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-small" href="https://wa.me/919876543210?text=I%20want%20to%20book%20a%20free%20trial">Join Now</a>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="kicker">Your Premium Strength Gym</p>
+        <h1>STRONGER<br><span>EVERY DAY.</span></h1>
+        <p>
+          Train harder, move better and manage your whole fitness journey from one digital gym platform —
+          free trials, memberships, attendance, payments, workouts and progress tracking.
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href="https://wa.me/919876543210?text=I%20want%20to%20book%20a%20free%20trial">Book Free Trial on WhatsApp</a>
+          <a class="btn ghost" href="#management">View Member Portal</a>
+        </div>
+        <div class="hero-stats">
+          <strong>500+<span>Active Members</span></strong>
+          <strong>10+<span>Expert Trainers</span></strong>
+          <strong>100%<span>Digital Tracking</span></strong>
+        </div>
+      </div>
+
+      <div class="hero-card" aria-label="Digital check-in preview">
+        <div class="phone-top">
+          <span>Member Check-in</span>
+          <b>QR</b>
+        </div>
+        <div class="qr-box">▦</div>
+        <p>Scan at reception for attendance</p>
+        <div class="alert success">✓ Checked in today at 06:42 AM</div>
+        <div class="alert warning">🔔 Membership expires in 3 days</div>
+      </div>
+    </section>
+
+    <section id="about" class="split-section">
+      <div>
+        <p class="kicker">Who We Are</p>
+        <h2>MORE THAN A GYM. IT'S A LIFESTYLE.</h2>
+      </div>
+      <div>
+        <p>
+          This gym was built on one idea: real strength is earned, not found.
+          Now the same premium experience is backed by a modern member management system
+          so your members, trainers and admins stay connected.
+        </p>
+        <ul class="check-list">
+          <li>Modern strength, cardio and functional training equipment</li>
+          <li>Certified trainers with digital workout plan assignment</li>
+          <li>QR attendance, payment history and renewal reminders</li>
+          <li>Mobile-friendly member dashboard for every fitness goal</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="facilities" class="section dark-section">
+      <p class="kicker">What We Offer</p>
+      <h2>WORLD-CLASS FACILITIES</h2>
+      <div class="feature-grid">
+        <article>
+          <h3>Strength Training</h3>
+          <p>Professional machines, racks and free weights for serious progress.</p>
+        </article>
+        <article>
+          <h3>Cardio Zone</h3>
+          <p>Treadmills, cycles, cross trainers and rowing equipment.</p>
+        </article>
+        <article>
+          <h3>Functional Training</h3>
+          <p>Athletic conditioning, mobility and performance movement space.</p>
+        </article>
+        <article>
+          <h3>Personal Training</h3>
+          <p>One-on-one coaching with plans tracked from the trainer dashboard.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="management" class="section management-section">
+      <p class="kicker">Gym Management SaaS</p>
+      <h2>ONE DASHBOARD FOR MEMBERS, TRAINERS & ADMINS.</h2>
+
+      <div class="saas-grid">
+        <article>
+          <span>📲</span>
+          <h3>Free-trial leads</h3>
+          <p>WhatsApp lead capture, source tracking and follow-up status for the front desk.</p>
+        </article>
+        <article>
+          <span>👤</span>
+          <h3>Member login</h3>
+          <p>Members can view membership validity, payments, attendance and progress.</p>
+        </article>
+        <article>
+          <span>📊</span>
+          <h3>QR attendance</h3>
+          <p>Scan-based check-in logs that persist in the backend database.</p>
+        </article>
+        <article>
+          <span>💳</span>
+          <h3>Payments & renewals</h3>
+          <p>Track plans, invoices, dues, payment status and upcoming renewals.</p>
+        </article>
+        <article>
+          <span>🏃</span>
+          <h3>Workout tracking</h3>
+          <p>Trainer-assigned routines with sets, reps and completion history.</p>
+        </article>
+        <article>
+          <span>🔐</span>
+          <h3>Role-based access</h3>
+          <p>Secure Admin, Trainer and Member views with permission-based actions.</p>
+        </article>
+      </div>
+
+      <div class="dashboard-preview">
+        <aside>
+          <button class="active">🛠️ Admin</button>
+          <button>👨‍🏫 Trainer</button>
+          <button>👤 Member</button>
+        </aside>
+
+        <div class="dashboard-panel">
+          <div class="panel-header">
+            <div>
+              <h3>Member Search, Filters & Reports</h3>
+              <p>Attendance, renewals and payment status in one operational view.</p>
+            </div>
+            <div class="search-pill">🔎 Search member</div>
+          </div>
+
+          <div class="metric-row">
+            <div>
+              <strong>284</strong>
+              <span>Active members</span>
+            </div>
+            <div>
+              <strong>47</strong>
+              <span>Today check-ins</span>
+            </div>
+            <div>
+              <strong>₹1.8L</strong>
+              <span>Monthly revenue</span>
+            </div>
+            <div>
+              <strong>18</strong>
+              <span>Expiring soon</span>
+            </div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Member</th>
+                <th>Plan</th>
+                <th>Status</th>
+                <th>Expiry</th>
+                <th>Attendance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Aarav Sharma</td>
+                <td>Premium 6M</td>
+                <td><span class="pill ok">Active</span></td>
+                <td>18 Sep 2026</td>
+                <td>22/26</td>
+              </tr>
+              <tr>
+                <td>Meera Khan</td>
+                <td>Strength 3M</td>
+                <td><span class="pill warn">Renewal due</span></td>
+                <td>12 Aug 2026</td>
+                <td>15/22</td>
+              </tr>
+              <tr>
+                <td>Kabir Verma</td>
+                <td>Annual Elite</td>
+                <td><span class="pill ok">Active</span></td>
+                <td>04 Jan 2027</td>
+                <td>28/30</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="membership" class="section pricing-section">
+      <p class="kicker">Pricing</p>
+      <h2>CHOOSE YOUR MEMBERSHIP.</h2>
+
+      <div class="pricing-grid">
+        <article>
+          <h3>BASIC</h3>
+          <strong>₹999/month</strong>
+          <p>Gym access, cardio area, strength equipment and locker facility.</p>
+          <a class="btn ghost" href="#contact">Get Started</a>
+        </article>
+
+        <article class="popular">
+          <small>Most Popular</small>
+          <h3>PRO</h3>
+          <strong>₹1,999/month</strong>
+          <p>Unlimited access, personal workout plan, fitness assessment and trainer guidance.</p>
+          <a class="btn" href="#contact">Get Started</a>
+        </article>
+
+        <article>
+          <h3>ELITE</h3>
+          <strong>₹3,499/month</strong>
+          <p>Everything in Pro plus personal training, diet guidance and progress tracking.</p>
+          <a class="btn ghost" href="#contact">Join Elite</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+      <div>
+        <p class="kicker">Get Started</p>
+        <h2>READY TO START YOUR FITNESS JOURNEY?</h2>
+        <p>Book your free gym tour and experience the difference for yourself — no pressure, no obligation.</p>
+        <a class="btn" href="https://wa.me/919876543210?text=I%20want%20to%20book%20a%20free%20trial">Book Free Trial</a>
+      </div>
+
+      <form class="lead-form">
+        <label>
+          Full Name
+          <input placeholder="Enter your name">
+        </label>
+        <label>
+          Phone Number
+          <input placeholder="10-digit mobile number">
+        </label>
+        <label>
+          Fitness Goal
+          <select>
+            <option>Muscle Building</option>
+            <option>Fat Loss</option>
+            <option>Strength Training</option>
+          </select>
+        </label>
+        <button type="button" class="btn">Submit Lead</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <strong>[GYM NAME].</strong>
+    <span>Premium strength gym with digital management for attendance, payments, workouts and renewals.</span>
+  </footer>
+</body>
+</html>
