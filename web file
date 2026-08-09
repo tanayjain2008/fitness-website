@@ -1,0 +1,6 @@
+index.html
+package.json
+package-lock.json
+src/styles.css
+scripts/validate-site.mjs
+docs/backend-architecture.md
